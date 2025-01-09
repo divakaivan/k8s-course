@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-web-hello
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: k8s-web-hello 
+      # which pods will be managed by which deployment
+  template:
+    # Pod information
+    metadata:
+      labels:
+        app: k8s-web-hello
+    spec:
+      containers:
+      - name: k8s-web-hello
+        image: timee98642/k8s-web-hello
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 3000
+# more info: https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/
